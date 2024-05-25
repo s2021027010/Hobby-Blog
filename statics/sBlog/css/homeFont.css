@@ -1,0 +1,45 @@
+
+html{
+    font-size: 90%; 
+    font-size: auto; 
+    overflow-x: hidden;
+    scroll-padding-top: 9rem;
+    scroll-behavior: smooth;
+  }
+  /*
+  body { 
+    background-color: #acbfce;
+    background-image:  url("/static/sBlog/hero-bg.jpg"); 
+  }
+*/
+
+a.closeP {
+  color: #969595;
+  justify-items: end;
+  align-content: end;
+  align-items: end;
+ }
+a.closeP:hover{
+  color: #ff0000;
+ }
+
+ .imgView {
+  height: 350px; width: 650px;
+  max-height: 350px; max-width: 650px; 
+  background-color: gray; 
+ }
+  .imgViewHome {
+    height: 425px; width: 450px;
+    max-height: 425px; max-width: 450px; 
+    background-color: gray; 
+}
+@media screen and (max-width: 700px) {
+  .imgView{
+      height: 300px; width: 350px;
+      max-height: 300px; max-width: 350px; 
+  }
+  .imgViewHome{
+    height: 300px; width: 340px;
+    max-height: 300px; max-width: 340px; 
+}
+}
