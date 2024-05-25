@@ -1,6 +1,6 @@
-username : s2021027010@umt.edu.pk
-email :s2021027010@umt.edu.pk
-password : umt@2020
+username : "your email"
+email :"your email"
+password : "your Password"
 
 
 
