@@ -42,14 +42,8 @@ INSTALLED_APPS = [
 
     "Accounts.apps.AccountsConfig", 
     'storeBlog.apps.StoreblogConfig',
-    'storeBlog.templatetags',
-
-    # for google login
-    #'django.contrib.sites',
-    #'allauth',
-    #'allauth.account',
-    #'allauth.socialaccount',
-    #'allauth.socialaccount.providers.google',
+    'storeBlog.templatetags', 
+    
     'social_django',
 ]
 SOCIAL_AUTH_REDIRECT_IS_HTTPS = True
@@ -85,8 +79,8 @@ SOCIALACCOUNT_PROVIDERS = {
 LOGIN_REDIRECT_URL = '/blog/home/'
 LOGOUT_REDIRECT_URL = '/account/logout/'
 
-SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '31428055737-pddivc98fa9tnd6olo48qbcnlb2re6fe.apps.googleusercontent.com'
-SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = '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'
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = 'your google cloud console key'
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = 'your google cloud console secret key'
 
 
 
@@ -177,19 +171,19 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_USE_TLS = True
 EMAIL_PORT = 587
-EMAIL_HOST_USER = 's2021027010@umt.edu.pk' # 'Hobby_Blog_News_Project.demo.django.login@gmail.com' 
-EMAIL_HOST_PASSWORD = 'Arshad@2020'
+EMAIL_HOST_USER = 'your email or username' # 'Hobby_Blog_News_Project.demo.django.login@gmail.com' 
+EMAIL_HOST_PASSWORD = 'your password email'
 
-VBcode = "https://6rxbmrmg-8000.inc1.devtunnels.ms/account"
+VBcode = "http://localhost:8000/account"
 LOCAL_HOST_STRIPE_Account = 'http://localhost:8000/account'
 LOCAL_HOST_STRIPE_bloog = 'http://localhost:8000/blog'
 LOCAL_HOST_STRIPE_VBcode = VBcode + '/logIn'
 
 
 # ------------------ Stripe integration -------------------
-STRIPE_PUBLIC_KEY = "pk_test_51MDkyQDUzRcdw0ai84xqLsFylb0EVMCnP4Qv9y3NeW219gwQifI696lrqejOacOFEVO5bbIa3Zxd9bi5k7ON0sc200KlqO6jNm"
-STRIPE_SECRET_KEY = "sk_test_51MDkyQDUzRcdw0aicbwC0jW25KusolDM0SPjbQxAau6bNtF097hPBYrS296qBWJMG8TqQbNCivSB21jUx3vClUjd00bAoD7Dwn"
-STRIPE_WEBHOOK_SECRET = "whsec_16d956fc793dd97e959535078ee4924688e48ba300703d002cef4346b27e10a2"
+STRIPE_PUBLIC_KEY = "**********84xqLsFylb0********************gwQifI696lrqejOacOFEV**********"
+STRIPE_SECRET_KEY = "*****************QDUzRcd***************jbQxAau6bNtF097hPB*********************"
+STRIPE_WEBHOOK_SECRET = "***************d956fc***********************48ba300**************4346b**********"
 
 
 
