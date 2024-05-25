@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"> 
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hobby News - Header</title>
+    <meta name="keywords" content="Follow Blog">
+    <meta name="description" content="Follow Blog">
+    <meta name="author" content="p-themes"> 
+
+    <!-- Favicon   -->
+    {% load static %}  
+    
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="apple-touch-icon" sizes="180x180" href="{% static 'sBlog/icons/apple-touch-icon.png' %}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{% static 'sBlog/icons/favicon-32x32.png' %}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{% static 'sBlog/icons/favicon-16x16.png' %}">
+    <link rel="manifest" href="{% static 'sBlog/icons/site.html' %}">
+    <link rel="mask-icon" href="{% static 'sBlog/icons/favicon.png' %}" color="#666666">
+    <link rel="shortcut icon" href="{% static 'sBlog/icons/favicon.png' %}">
+    <meta name="msapplication-config" content="{% static 'sBlog/icons/favicon.png' %}"> 
+    
+    <link rel="font-awesome" href="{% static 'sBlog/fonts/flaming/flaming-webfont.woff2' %}">
+    <link rel="font-awesome" href="{% static 'sBlog/fonts/flaming/flaming-webfont.woff' %}">
+    <meta name="apple-mobile-web-app-title" content="Follow Blog">
+    <meta name="application-name" content="Follow Blog">
+    <meta name="msapplication-TileColor" content="#cc9966">
+    <meta name="theme-color" content="#ffffff"> 
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400&display=swap" rel="stylesheet">
+    <!-- Plugins CSS File -->
+    {% load static %} 
+
+    <link rel="stylesheet" href="{% static 'sBlog/css/home.css' %}"> 
+    <link rel="stylesheet" href="{% static 'sBlog/css/bootstrap.min.css' %}"> 
+    <link rel="stylesheet" href="{% static 'sBlog/css/homeNavbar.css' %}">
+    <link rel="stylesheet" href="{% static 'sBlog/css/Oldbootstrap.min.css' %}">  
+    <link rel="stylesheet" href="{% static 'sBlog/css/style.css' %}"> 
+    <link rel="stylesheet" href="{% static 'sBlog/css/homeFont.css' %}"> 
+    <link rel="stylesheet" href="{% static 'sBlog/css/searchbar.css' %}">
+    <link rel="stylesheet" href="{% static 'sBlog/css/navbartitle.css' %}">
+
+    <link rel="stylesheet" href="{% static 'sBlog/cssB/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'sBlog/cssB/templatemo-xtra-blog.css' %}">
+
+    <link rel="stylesheet" href="{% static 'sBlog/css/model.scss' %}">
+    <link rel="stylesheet" href="{% static 'sBlog/css/main_style.scss' %}">
+    
+    
+<script data-require="jquery@*" data-semver="2.2.0" src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+<script data-require="bootstrap@*" data-semver="3.3.6" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+<link data-require="bootstrap-css@3.3.6" data-semver="3.3.6" rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.css" />
+<link rel="stylesheet" href="https://code.jquery.com/ui/1.11.3/themes/smoothness/jquery-ui.css" />
+  </head>
+  <body>
+    
+  
+  <nav class="navbar header">
+   <a href="{% url 'home' %}"><div class=" logo">
+     <img src="{% static 'sBlog/logo.png' %}" class=" logo"  alt="Pin Logo" width="100" height="40" />
+   </div></a>
+
+   <!-- NAVIGATION MENU -->
+
+       <div class="input-box">
+         <i class="uil uil-search"></i> 
+         <form action="{% url 'search' %}"  method="get">  
+           <input name="search" id="search" type="text" placeholder="Search here..." />
+           <button tpye="submit" class="button"><p class="material-icons">search</p></button>
+         </form> 
+       </div>
+
+ 
+   <ul class="nav-links">
+
+     <!-- USING CHECKBOX HACK -->
+
+     <input type="checkbox" id="checkbox_toggle" />
+
+     <label for="checkbox_toggle" class="hamburger">&#9776;</label>
+
+     <!-- NAVIGATION MENUS -->
+
+     <div class="menu" > 
+        
+       <li class="user"><a href="{% url 'home' %}" title="Home"  class="material-icons"  style="color: rgba(47, 116, 219, 0.89);"> home </a> 
+       <p> <a href="{% url 'home' %}" title="Home" style="color: rgba(47, 116, 219, 0.89);"> Home </a></p></li> 
+      
+       <li class="user"><a href="{% url 'profile' %}" title="Detail Post"  class="material-icons"  style="color: rgba(47, 116, 219, 0.89);"> account_circle </a> 
+        <p> <a href="{% url 'profile' %}" title="Profile" style="color: rgba(47, 116, 219, 0.89);"> Profile </a></p></li> 
+          
+       <li class="user"><a href="{% url 'logout' %}" title="log Out"  class="material-icons"  style="color: rgba(47, 116, 219, 0.89);"> logout  </a> 
+        <p> <a href="{% url 'logout' %}" title="Logout" style="color: rgba(47, 116, 219, 0.89);"> LogOut</a></p></li> 
+           
+
+     </div>
+   </ul>
+ </nav>
+ 

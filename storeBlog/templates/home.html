@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"> 
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hobby News - Home </title>
+    <meta name="keywords" content="Follow Hobby News Blog">
+    <meta name="description" content="Follow Hobby News Blog">
+    <meta name="author" content="p-themes"> 
+    {% load static %} 
+    {% load custom_tag %}
+{% include 'header.html' %}
+
+    <!-- ####################################              ##############################         ####################################-->    
+ 
+  <div class="container-fluid">
+      <main class="tm-main">
+
+        <div class="row tm-row">
+          <div class="col-12">
+            {% if messages %}
+							<ul class="messages">
+							{% for message in messages %}
+							<p class="mb-4">
+								<li {% if message.tags %} style="color: rgb(230, 6, 6);" class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+							</p>
+							{% endfor %}
+							</ul>
+						{% endif %}
+            <div class="form-inline tm-mb-8 tm-search-form">        
+              <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
+                Create Blog<i class="material-icons">edit</i>
+              </button> 
+              <!-- Modal -->
+              <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                {% include 'AddPost.html' %}
+              </div>
+            </div>
+          </div>                
+      </div> 
+        <hr class="tm-hr-primary tm-mb-55">
+          <div class="row tm-row">
+            {% for blog in Show_blog %}
+              <article class="col-12 col-md-6 tm-post">
+                 
+                  <a href="{% url 'showPost' blog.blog_id %}" class="effect-lily tm-post-link tm-pt-60">
+                    {% if blog.blog_type == "Text" %}
+                    
+                    {% else %}
+                      {% if blog.blog_type == "Image" %}
+                        <div class="imgViewHome">
+                            <img src="{{BASIC_DIR}}/blog/media/{{blog.blog_file}}"  class="imgViewHome" alt="Image" class="img-fluid">                            
+                        </div>
+                      {% else %}
+                      <video  controls class="imgViewHome">
+                        <source src="{{BASIC_DIR}}/blog/media/{{blog.blog_file}}" class="imgViewHome" type="video/mp4">	 
+                    </video>
+                      {% endif %}
+                    {% endif %}
+                      <span class="position-absolute tm-new-badge">New</span>
+                      <h2 class="tm-pt-20 tm-color-primary tm-post-title">{{blog.blog_Title}}</h2>
+                  </a>   
+                  {% if blog.blog_Post_Text == "N/A" %}    
+                  {% else %}             
+                  <p class="tm-pt-25">
+                      {% if blog.blog_Post_Text|slice:400 < blog.blog_Post_Text|slice:401 %}
+                      {{blog.blog_Post_Text|slice:400}} ... <a href="{% url 'showPost' blog.blog_id %}" style="color: rgba(37, 125, 219, 0.839);"> Read more </a>
+                      {% else %}
+                      {{blog.blog_Post_Text}}
+                      {% endif %}
+                  </p>
+                  {% endif %}
+                  <div class="d-flex justify-content-between tm-pt-45">
+                    <span class="tm-color-primary">
+                        {% if blog.blog_Category == "N/A" %}
+                            Text
+                        {% else %}
+                          {{blog.blog_Category.split|join:" , "}}
+                        {% endif %}
+                    </span>
+                      <span class="tm-color-primary">{{blog.created_at}}</span>
+                  </div>
+                  <hr>
+                  <div class="d-flex justify-content-between">
+                      <span>({{blog.blog_id|Comment_count}})  comments</span> 
+                      <span> 
+                        <form action="{% url 'add_favorite' %}" method="post" enctype="multipart/form-data">  
+                          {% csrf_token %}
+                          <input value="{{blog.blog_id}}" name="favorite_id" id="favorite_id" hidden>
+                        <button type="submit" style="border: none none; border-radius: none none; border-inline-color: none;">({{blog.blog_id|Favorite_count}})  Favorite</button>
+                        </form>
+                       </span>
+                      <span>by {{blog.blog_email.first_name}} {{blog.blog_email.last_name}}</span>
+                  </div>
+              </article>
+              
+              {% endfor %}
+             
+          </div> 
+          <hr class="tm-hr-primary tm-mb-55">          
+          <footer class="row tm-row">
+              <hr class="col-12">
+              <div class="col-md-6 col-12 tm-color-gray">
+                  by Arshad Ali Design :<a rel="nofollow" target="_parent" href="https://www.github.com/s2021027010" class="tm-external-link">Hobby Blogs</a>
+              </div>
+              <div class="col-md-6 col-12 tm-color-gray tm-copyright">
+                  Copyright 2024/03/03 , Hobby Blog News Company Co. Ltd.
+              </div>
+          </footer>
+      </main>
+  </div>
+  
+    <!-- ####################################              ##############################         ####################################-->
+ 
+</body>
+
+{% load static %}
+<script src="https://code.jquery.com/ui/1.11.3/jquery-ui.min.js"></script>
+<script src="{% static 'sBlog/jsB/jquery.min.js' %}"></script>
+<script src="{% static 'sBlog/jsB/templatemo-script.js' %}"></script> 
+<script src="{% static 'sBlog/js/model.js' %}"></script>
+
+<script>
+  function openForm() {
+    document.getElementById("myForm").style.display = "block";
+    document.getElementById("btnShow").style.display = "none";
+    document.getElementById("btnClose").style.display = "block";
+  }
+  
+  function closeForm() {
+    document.getElementById("myForm").style.display = "none";
+    document.getElementById("btnShow").style.display = "block";
+    document.getElementById("btnClose").style.display = "none";
+  }
+  </script>
+  
+</html>

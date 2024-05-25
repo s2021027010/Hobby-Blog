@@ -1,0 +1,85 @@
+<head> 
+    {% load static %}  
+    
+    <link rel="stylesheet" type="text/css" href="{% static 'sAccount/fonts/font-awesome-4.7.0/css/font-awesome.min.css' %}"> 
+    <link rel="stylesheet" type="text/css" href="{% static 'sAccount/fonts/iconic/css/material-design-iconic-font.min.css' %}"> 
+    <link rel="stylesheet" type="text/css" href="{% static 'sAccount/vendor/animsition/css/animsition.min.css' %}"> 
+    <link rel="stylesheet" type="text/css" href="{% static 'sAccount/vendor/select2/select2.min.css' %}"> 
+    <link rel="stylesheet" type="text/css" href="{% static 'sAccount/vendor/daterangepicker/daterangepicker.css' %}"> 
+    <link rel="stylesheet" type="text/css" href="{% static 'sBlog/css/util.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'sBlog/css/main.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'sBlog/css/checkbox.css' %}">
+  </head>
+  {% load custom_tag %}
+  <body> <center > 
+            <div class="wrap-login100 p-l-55 p-r-55 p-t-65 p-b-54">
+              <form class="login100-form validate-form"  action="{% url 'showPost' Show_blog.blog_id %}" method="post" enctype="multipart/form-data">
+                  {% csrf_token %}
+                  <a type="button" data-dismiss="modal" class="closeP material-icons">close</a>
+                  <span class="login100-form-title p-b-49">
+                      Update Blogs
+                  </span>
+      
+                  <div class="wrap-input100 validate-input m-b-23" data-validate = "Username is reauired"   oninput="weFunction()"  >
+                        {{ Edit_Blog.as_p }}
+                        <div class="wrap-input100 validate-input m-b-23">
+                            <label for="id_blog_Category">Category Blog</label>  
+                                                            
+                            <input type="text" value="{{Show_blog.blog_Category}} " id="demo" name="blog_Category" class="input100" style="max-width: 550px;" placeholder="You can add Category from drop down list"  onclick="yourFunction()">
+                            <select class="sel input100" id="myInput"  style="max-width: 550px;" oninput="myFunction()"> 
+                                <option value="Please click to add Multiple Category from here" disabled selected>Please click to add Multiple Category from here</option>
+                                {% for cate in obj_Catego %}
+                                <option  id="myInput" oninput="myFunction()"  class="{{cate.cate_name}}"  value="{{cate.cate_name}}">{{cate.cate_name}}</option>
+                                {% endfor %}
+                            </select> 
+                          </div>
+                        <p>
+                            <label for="id_blog_Post_Text">Post Text:</label>
+                            <textarea name="blog_Post_Text"  oninput="weFunction()"  cols="40" rows="10" type="textarea" class="input100" style="max-width: 550px; height: 180px;" maxlength="5000" id="id_blog_Post_Text">{{Show_blog.blog_Post_Text}}</textarea> 
+                    </p>
+                    </div> 
+                    
+                    <div class="container-login100-form-btn">
+                        <div class="wrap-login100-form-btn">
+                            <div class="login100-form-bgbtn"></div>
+                            <button class="login100-form-btn">
+                                Update Blog
+                            </button>
+                        </div>
+                    </div>
+                     
+                </form> 
+    </div>
+    </center>
+ 
+<!--===============================================================================================-->
+<script src="{% static 'sAccount/js/jquery-3.2.1.min.js' %}"></script>
+    <script src="{% static 'sAccount/js/animsition.min.js' %}"></script>
+    <script src="{% static 'sAccount/js/popper.js' %}"></script>
+    <script src="{% static 'sAccount/js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'sAccount/js/select2.min.js' %}"></script>
+    <script src="{% static 'sAccount/js/moment.min.js' %}"></script>
+    <script src="{% static 'sAccount/js/daterangepicker.js' %}"></script>
+    <script src="{% static 'sAccount/js/countdowntime.js' %}"></script>
+    <script src="{% static 'sAccount/js/main.js' %}"></script>
+
+    <script src="{% static 'sBlog/js/checkbox.js' %}"></script>
+
+    <script>  
+        function myFunction() {
+          let text = document.getElementById("myInput").value;
+          document.getElementById("demo").value += text + " ";  
+          $('select option:not(:selected)').each(function(){
+              $("."+text).attr('disabled', 'disabled');
+             });
+      
+        }
+      function yourFunction() {
+        document.getElementById("myInput").style.display = "block";
+        }
+        
+      function weFunction() {
+          document.getElementById("myInput").style.display = "none";
+          }
+  
+  </script>

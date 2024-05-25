@@ -1,0 +1,28 @@
+<div class="container" style="background: #ddd;">
+    <a type="button" data-dismiss="modal" class="closeP material-icons" style="color: red;"  onclick="window.location.reload(true);">close</a>
+    <div class="row">
+        <div class="col-md-6 ml-auto mr-auto">
+           <div class="profile">
+            <form class="login100-form validate-form"  action="{% url 'EditProfile' %}" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+            {{ editProfile.as_p }}
+                <center class="name">
+                    <h3 class="title"> 
+
+                    <a href="#pablo" class="btn btn-just-icon btn-link btn-dribbble"><i class="fa fa-dribbble"></i></a>
+                    <a href="#pablo" class="btn btn-just-icon btn-link btn-twitter"><i class="fa fa-twitter"></i></a>
+                    <a href="#pablo" class="btn btn-just-icon btn-link btn-pinterest"><i class="fa fa-pinterest"></i></a>
+                </center>
+                <button type="submit" value="Edit"   class="btn-primary tm-btn btn">Save
+                    <i class="material-icons">add</i> </button>
+                </form>
+            </div>
+        </div>
+    </div> 
+    <center>
+ 
+        </center>
+        <!-- Modal --> 
+         
+       
+</div>

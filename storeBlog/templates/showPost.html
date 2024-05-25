@@ -1,0 +1,246 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"> 
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hobby News - Post </title>
+    <meta name="keywords" content="Follow Hobby News Blog">
+    <meta name="description" content="Follow Blog">
+    <meta name="author" content="p-themes"> 
+   
+  </head>
+  <style>
+    .replyClass{
+        color: #fff; 
+        position: relative; 
+        top: 53px; 
+        left: 108px;
+    }
+    @media screen and (max-width: 600px) {
+        .replyClass{ 
+        top: 2%; 
+        left: 80%;
+        }
+  }
+  </style>
+</body>
+{% load custom_tag %}
+{% include 'header.html' %}
+
+    <!-- ####################################              ##############################         ####################################--> 
+    <div class="container-fluid">
+        <main class="tm-main">    
+                 
+            
+            <div class="row tm-row">
+                <div class="col-12"> 
+                    {% if messages %}
+							<ul class="messages">
+							{% for message in messages %}
+							<p class="mb-4">
+								<li {% if message.tags %} style="color: rgb(230, 6, 6);" class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+							</p>
+							{% endfor %}
+							</ul>
+						{% endif %}
+                    <div class="form-inline tm-mb-8 tm-search-form">    
+                        {% if Show_blog.blog_email.email == user.email %}    
+                        <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
+                          <i class="material-icons">edit_note</i>
+                        </button> 
+                        {% endif %}
+                        <!-- Modal -->
+                        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                          {% include 'UpdatePost.html' %}
+                        </div>
+                    </div>
+
+                    {% if Show_blog.blog_type == "Text" %}
+                    
+                    {% else %}
+                      {% if Show_blog.blog_type == "Image" %}
+                        <div class="imgView">  
+                            <img src="{{BASIC_DIR}}/blog/media/{{Show_blog.blog_file}}" class="imgView" alt="Image" class="img-fluid">                            
+                        </div>
+                      {% else %}
+                        <video  controls class="imgView">
+                          <source src="{{BASIC_DIR}}/blog/media/{{Show_blog.blog_file}}" class="imgView" type="video/mp4">	
+                          
+                      </video>
+                      {% endif %}
+                    {% endif %}
+                </div>
+            </div>
+            <div class="row tm-row">
+                <div class="col-lg-8 tm-post-col">
+                    <div class="tm-post-full">                    
+                        <div class="mb-4">
+                            <h2 class="pt-2 tm-color-primary tm-post-title">{{Show_blog.blog_Title}}</h2>
+                            <p class="tm-mb-40">{{Show_blog.created_at}} posted by {{Show_blog.blog_email.first_name}} {{Show_blog.blog_email.last_name}}</p> 
+                            <p>
+                                {% if Show_blog.blog_Post_Text == "N/A" %}    
+                                    no more
+                                {% else %}           
+                                    {{Show_blog.blog_Post_Text}}   
+                                {% endif %}
+                            </p>
+                            <span> 
+                                <form action="{% url 'add_favorite' %}" method="post" enctype="multipart/form-data">  
+                                  {% csrf_token %}
+                                  <input value="{{Show_blog.blog_id}}" name="favorite_id" id="favorite_id" hidden>
+                                <button type="submit" style="border: none none; border-radius: none none; border-inline-color: none;">({{Show_blog.blog_id|Favorite_count}})  Favorite</button>
+                                </form>
+                               </span>
+                            <span class="d-block text-right tm-color-primary">
+                                {% if Show_blog.blog_Category == "N/A" %}
+                                    Text
+                                {% else %}
+                                {{Show_blog.blog_Category.split|join:" , "}}
+                                {% endif %}
+                            </span>
+                        </div>
+                        
+                        
+                    </div>
+                </div>
+                <aside class="col-lg-4 tm-aside-col">
+                    <div class="tm-post-sidebar">
+                        <hr class="mb-3 tm-hr-primary">
+                        <h2 class="mb-4 tm-post-title tm-color-primary">Categories</h2>
+                        <ul class="tm-mb-75 pl-5 tm-category-list">
+                            {% if Show_blog.blog_Category == "N/A" %}
+                            <li><a href="#" class="tm-color-primary">Text</a></li> 
+                                {% else %}  
+                                    {% for cat in Show_blog.blog_id|Cate_Split %}
+                                    {% if cat != "" %} 
+                                    <li><a href="{{BASE_DIR}}/blog/search/?search={{cat}}" type="submit" class="tm-color-primary">{{cat}}</a></li> 
+                                    {% endif %}
+                                    {% endfor %}
+                                 {% endif %}
+                             
+                        </ul>
+                        <hr class="mb-3 tm-hr-primary">
+                        <h2 class="tm-mb-40 tm-post-title tm-color-primary">Related Posts</h2>
+                        {% for cat in Show_blog.blog_id|Relate_Post %}
+                            {% if cat != "" and cat|Relate_Show_ID != Show_blog.blog_id %} 
+                                        <a href="{{BASE_DIR}}/blog/showPost/{{cat}}" class="d-block tm-mb-40">
+                                            <figure>
+                                                {% if cat|Relate_Show_type == "Image" %}
+                                                <img src="{{BASIC_DIR}}/blog/media/{{cat|Relate_Show_img}}" alt="Image" class="mb-3 img-fluid">
+
+                                                {% else %}
+                                                    <video  controls   style="height: 220px; min-height: 220px; max-height: 220px; width: 280px; min-width: 280px; max-width: 280px;" >
+                                                    <source src="{{BASIC_DIR}}/blog/media/{{cat|Relate_Show_img}}" type="video/mp4">	
+                                                    
+                                                </video>
+                                                {% endif %} 
+                                                <figcaption class="tm-color-primary">{{cat|Relate_Show_title}}</figcaption>
+                                            </figure>
+                                        </a>   
+                            {% endif %}
+                        {% endfor %}
+                    </div>                    
+                </aside>
+            </div>
+            <div style="background: #ddd;">
+                <h2 class="tm-color-primary tm-post-title">Comments  ({{Show_blog.blog_id|Comment_count}}) </h2>
+                <hr class="tm-hr-primary tm-mb-45">
+
+                <form action="{% url 'commentBlog' Show_blog.blog_id %}" method="post" enctype="multipart/form-data" class="mb-5 tm-comment-form">
+                    {% csrf_token %}
+                    <h2 class="tm-color-primary tm-post-title mb-4">Your comment</h2>
+                      
+                    <div class="mb-4">
+                        <textarea class="comment100" id="comment_Text" name="comment_Text" rows="6" placeholder="Write Comment here"></textarea>
+                        <input class="form-control" name="comment_type" value="Comment" type="text" hidden>
+                        <button type="submit" style="align-items: end; justify-items: end;justify-self: self-end;" class="tm-btn tm-btn-primary tm-btn-small"><i class="material-icons">send</i></button> 
+                    </div>                                  
+                </form> 
+
+                <hr class="tm-hr-primary tm-mb-46">
+                {% for comment in obj_comment %}
+                {% if comment.comment_blog_id.blog_id == Show_blog.blog_id %}
+                {% if comment.comment_type == "Comment" %}
+                <div class="tm-comment tm-mb-45"  style="background: #eee;">
+                    <figure class="tm-comment-figure">
+                        <img src="{{BASIC_DIR}}/blog/media/{{comment.comment_email.profile_image}}" alt="Image" width="75" height="75" class="mb-2 rounded-circle img-thumbnail">
+                        <figcaption class="tm-color-primary text-center">{{comment.comment_email.first_name}} {{comment.comment_email.last_name}}</figcaption>
+                    </figure>
+                    <div>
+                        <p>
+                            {{comment.Comment_Text}}
+                        </p>
+                        <br>
+                        <span class="tm-color-primary">{{comment.created_at}}</span>
+                                                                     
+                    </div>                       
+                </div>
+                <br><br> 
+                <div class="d-flex justify-content-between" style="color: #bdcfcf;">
+                    <form action="{% url 'commentBlog' Show_blog.blog_id  %}" method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <div class="row">  
+                        <div class="col-md-10">
+                            <textarea class="comment100" row="3"  name="comment_Text" type="text" placeholder="REPLY here"></textarea>
+                            <input class="form-control" name="comment_type" value="{{comment.comment_pk}}" type="text" hidden>
+                        </div>
+                            <div class="col-md-2">
+                            <button  type="submit" class="btn tm-btn-primary tm-color-primary replyClass" >REPLY</button> <br> 
+                        </div>  
+                        </div> 
+                    </form> 
+                </div> 
+                {% endif %}
+                {% for reply in obj_reply %} 
+                {% if reply.comment_blog_id.blog_id == Show_blog.blog_id %}
+                {% if reply.comment_type == comment.comment_pk %}
+                <div class="tm-comment-reply tm-mb-45" >
+                    <hr>
+                    <div class="tm-comment">
+                        <figure class="tm-comment-figure">
+                            <img src="{{BASIC_DIR}}/blog/media/{{reply.comment_email.profile_image}}" alt="Image"  width="75" height="75" class="mb-2 rounded-circle img-thumbnail">
+                            <figcaption class="tm-color-primary text-center">{{reply.comment_email.first_name}} {{reply.comment_email.last_name}}</figcaption>    
+                        </figure>
+                        <p>
+                            {{reply.Comment_Text}}
+                        </p>
+                    </div>    
+                    <center>  
+                    <span class="d-block text-right tm-color-primary">{{reply.created_at}}</span>
+                    </center>
+                </div>
+                {% endif %}
+                {% endif %}
+                {% endfor %}
+
+
+                {% endif %}
+                {% endfor %}                    
+            </div>
+            
+            
+
+
+
+            <hr class="tm-hr-primary tm-mb-55"> 
+            <footer class="row tm-row">
+                <hr class="col-12">
+                <div class="col-md-6 col-12 tm-color-gray">
+                    by Arshad Ali Design :<a rel="nofollow" target="_parent" href="https://www.github.com/s2021027010" class="tm-external-link">Hobby Blogs</a>
+                </div>
+                <div class="col-md-6 col-12 tm-color-gray tm-copyright">
+                    Copyright 2024/03/03 , Hobby Blog News Company Co. Ltd.
+                </div>
+            </footer>
+        </main>
+    </div>
+
+
+
+</body>
+
+{% load static %}
+<script src="{% static 'sBlog/jsB/jquery.min.js' %}"></script>
+<script src="{% static 'sBlog/jsB/templatemo-script.js' %}"></script>
+</html>
