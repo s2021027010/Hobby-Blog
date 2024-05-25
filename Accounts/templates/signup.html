@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"> 
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up Page</title>
+    <meta name="keywords" content="Follow Blog">
+    <meta name="description" content="Follow Blog">
+    <meta name="author" content="p-themes"> 
+
+    <!-- Favicon   -->
+    {% load static %}  
+    
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="apple-touch-icon" sizes="180x180" href="{% static 'sAccount/icons/apple-touch-icon.png' %}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{% static 'sAccount/icons/favicon-32x32.png' %}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{% static 'sAccount/icons/favicon-16x16.png' %}">
+    <link rel="manifest" href="{% static 'sAccount/icons/site.html' %}">
+    <link rel="mask-icon" href="{% static 'sAccount/icons/favicon.png' %}" color="#666666">
+    <link rel="shortcut icon" href="{% static 'sAccount/icons/favicon.png' %}">
+    <meta name="msapplication-config" content="{% static 'sAccount/icons/favicon.png' %}"> 
+    
+    <link rel="font-awesome" href="{% static 'sAccount/fonts/flaming/flaming-webfont.woff2' %}">
+    <link rel="font-awesome" href="{% static 'sAccount/fonts/flaming/flaming-webfont.woff' %}">
+    <meta name="apple-mobile-web-app-title" content="Follow Blog">
+    <meta name="application-name" content="Follow Blog">
+    <meta name="msapplication-TileColor" content="#cc9966">
+    <meta name="theme-color" content="#ffffff"> 
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400&display=swap" rel="stylesheet">
+    <!-- Plugins CSS File -->
+    {% load static %}  
+   
+	<link rel="stylesheet" type="text/css" href="{% static 'sAccount/vendor/bootstrap/css/bootstrap.min.css' %}"> 
+    <link rel="stylesheet" type="text/css" href="{% static 'sAccount/fonts/font-awesome-4.7.0/css/font-awesome.min.css' %}"> 
+    <link rel="stylesheet" type="text/css" href="{% static 'sAccount/fonts/iconic/css/material-design-iconic-font.min.css' %}"> 
+    <link rel="stylesheet" type="text/css" href="{% static 'sAccount/vendor/animate/animate.css' %}"> 
+    <link rel="stylesheet" type="text/css" href="{% static 'sAccount/vendor/css-hamburgers/hamburgers.min.css' %}"> 
+    <link rel="stylesheet" type="text/css" href="{% static 'sAccount/vendor/animsition/css/animsition.min.css' %}"> 
+    <link rel="stylesheet" type="text/css" href="{% static 'sAccount/vendor/select2/select2.min.css' %}"> 
+    <link rel="stylesheet" type="text/css" href="{% static 'sAccount/vendor/daterangepicker/daterangepicker.css' %}"> 
+    <link rel="stylesheet" type="text/css" href="{% static 'sAccount/css/util.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'sAccount/css/main.css' %}">
+   
+  </head>
+  <body>
+    	
+	<div class="limiter">
+		<div class="container-login100" style="background-image:   url('/static/sAccount/bg-01.jpg');">
+			<div class="wrap-login100 p-l-55 p-r-55 p-t-65 p-b-54">
+        {% if messages %}
+            <ul class="messages">
+              {% for message in messages %}
+              <p class="mb-4">
+                  <li {% if message.tags %} style="color: rgb(230, 6, 6);" class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+              </p>
+              {% endfor %}
+            </ul>
+          {% endif %}
+				<form class="login100-form validate-form"  action="{% url 'register' %}" method="post" enctype="multipart/form-data">
+          {% csrf_token %}
+					<span class="login100-form-title p-b-49">
+						Register
+					</span>
+
+					<div class="wrap-input100 validate-input m-b-23" data-validate = "Username is reauired">
+            {{ register.as_p }}
+					</div> 
+				
+					
+					<div class="container-login100-form-btn">
+						<div class="wrap-login100-form-btn">
+							<div class="login100-form-bgbtn"></div>
+							<button class="login100-form-btn">
+								Signup
+							</button>
+						</div>
+					</div>
+
+					<div class="txt1 text-center p-t-54 p-b-20">
+						<span>
+							Or Sign Up Using
+						</span>
+					</div>
+
+					<div class="flex-c-m">
+						<a href="#" class="login100-social-item bg1">
+							<i class="fa fa-facebook"></i>
+						</a>
+
+						<a href="#" class="login100-social-item bg2">
+							<i class="fa fa-twitter"></i>
+						</a>
+
+						<a href="#" class="login100-social-item bg3">
+							<i class="fa fa-google"></i>
+						</a>
+					</div>
+         
+          
+					<div class="flex-col-c p-t-155">
+						<span class="txt1 p-b-17">
+							<a href="#">
+                Forgot password?
+              </a>
+						</span>
+
+						<a href="{% url 'login' %}" class="txt2">
+							Log In
+						</a>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+	 
+	<div id="dropDownSelect1"></div> 
+ 
+<!--===============================================================================================-->
+<script src="{% static 'sAccount/js/jquery-3.2.1.min.js' %}"></script>
+	<script src="{% static 'sAccount/js/animsition.min.js' %}"></script>
+	<script src="{% static 'sAccount/js/popper.js' %}"></script>
+	<script src="{% static 'sAccount/js/bootstrap.min.js' %}"></script>
+	<script src="{% static 'sAccount/js/select2.min.js' %}"></script>
+	<script src="{% static 'sAccount/js/moment.min.js' %}"></script>
+	<script src="{% static 'sAccount/js/daterangepicker.js' %}"></script>
+	<script src="{% static 'sAccount/js/countdowntime.js' %}"></script>
+	<script src="{% static 'sAccount/js/main.js' %}"></script>
+   
+  </body>
+</html>
